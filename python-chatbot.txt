@@ -1,0 +1,91 @@
+Python 3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import tkinter as tk
+>>> from tkinter import scrolledtext
+>>> import nltk
+>>> from nltk.chat.util import Chat, reflections
+>>>
+>>> # Define some simple patterns and responses
+>>> pairs = [
+...     [
+...         r"my name is (.*)",
+...         ["Hello %1, How can I help you today?",]
+...     ],
+...     [
+...         r"hi|hello|hey",
+...         ["Hello!", "Hi there!", "Hey! How can I help you today?",]
+...     ],
+...     [
+...         r"what is your name?",
+...         ["My name is ChatBot.", "I am ChatBot created to assist you.",]
+...     ],
+...     [
+...         r"how are you?",
+...         ["I'm doing well, thank you!", "I'm just a program, but I'm feeling great!",]
+...     ],
+...     [
+...         r"quit",
+...         ["Goodbye! Have a great day ahead!", "Bye! Take care.",]
+...     ],
+...     [
+...         r"(.*)",
+...         ["I'm sorry, I don't understand that. Could you rephrase?",]
+...     ],
+... ]
+>>>
+>>> # Create the chatbot
+>>> chatbot = Chat(pairs, reflections)
+>>>
+>>> # Function to handle user input and bot response
+>>> def respond():
+...     user_input = entry_box.get()
+...     if user_input.strip():  # Check if the input is not empty
+...         chat_log.config(state=tk.NORMAL)
+...         chat_log.insert(tk.END, "You: " + user_input + "\n")
+...         entry_box.delete(0, tk.END)
+...
+>>>         response = chatbot.respond(user_input)
+  File "<stdin>", line 1
+    response = chatbot.respond(user_input)
+IndentationError: unexpected indent
+>>>         if not response:
+  File "<stdin>", line 1
+    if not response:
+IndentationError: unexpected indent
+>>>             response = "I'm sorry, I don't understand that."
+  File "<stdin>", line 1
+    response = "I'm sorry, I don't understand that."
+IndentationError: unexpected indent
+>>>
+>>>         chat_log.insert(tk.END, "Bot: " + response + "\n")
+  File "<stdin>", line 1
+    chat_log.insert(tk.END, "Bot: " + response + "\n")
+IndentationError: unexpected indent
+>>>         chat_log.config(state=tk.DISABLED)
+  File "<stdin>", line 1
+    chat_log.config(state=tk.DISABLED)
+IndentationError: unexpected indent
+>>>         chat_log.yview(tk.END)
+  File "<stdin>", line 1
+    chat_log.yview(tk.END)
+IndentationError: unexpected indent
+>>>
+>>> # Set up the GUI
+>>> root = tk.Tk()
+>>> root.title("Python Chatbot")
+''
+>>>
+>>> chat_log = scrolledtext.ScrolledText(root, state='disabled', wrap='word', width=50, height=20)
+>>> chat_log.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+>>> chat_log.config(state=tk.DISABLED)
+>>>
+>>> entry_box = tk.Entry(root, width=40)
+>>> entry_box.grid(row=1, column=0, padx=10, pady=10)
+>>> entry_box.bind("<Return>", lambda event: respond())
+'2681498407296<lambda>'
+>>>
+>>> send_button = tk.Button(root, text="Send", command=respond)
+>>> send_button.grid(row=1, column=1, padx=10, pady=10)
+>>>
+>>> root.mainloop()
+>>>
